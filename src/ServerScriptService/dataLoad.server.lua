@@ -1,13 +1,19 @@
 local DataManager = require(game.ReplicatedStorage.DataManager)
 local InventoryComm = game.ReplicatedStorage.RemoteConnections.Inventory
+local RequestData = game.ReplicatedStorage.RemoteConnections.RequestData
 
 game.Players.PlayerAdded:Connect(function(player)
     local data 
-    print("loading data")
     repeat task.wait() data = DataManager:Get(player) until data ~= nil
-    print("recieved data")
 
     if data then
-        InventoryComm:FireClient(player, data.OreInventory)
+        InventoryComm:FireClient(player, data)
     end
 end) 
+
+RequestData.OnServerEvent:Connect(function(player)
+    local data 
+    repeat task.wait() data = DataManager:Get(player) until data ~= nil
+
+    RequestData:FireClient(player, data)
+end)

@@ -6,6 +6,8 @@ local Player = game.Players.LocalPlayer
 local playerGui = Player:WaitForChild("PlayerGui")
 local Mouse = Player:GetMouse()
 
+local RequestData = game.ReplicatedStorage.RemoteConnections.RequestData
+
 local PickComms = game:GetService("ReplicatedStorage").RemoteConnections.PickComms
 
 local tool = script.Parent
@@ -28,9 +30,35 @@ HighlightSelected.Name = "Highlight_Selected"
 HighlightSelected.FillTransparency = 1
 HighlightSelected.OutlineColor = Color3.fromRGB(129, 255, 125)
 
+local data
+--// fetch data \\-
+local function fetchData()
+    RequestData:FireServer(Player)
+end
+
+RequestData.OnClientEvent:Connect(function(d)
+    data = d
+end)
+
+fetchData()
+
+--// Mining \\--
 tool.Activated:Connect(function()
     if currentlyMining then return end
     currentlyMining = true 
+
+    fetchData()
+
+    local amount = 0
+    for _,v in pairs(data.OreInventory) do
+        amount += v
+    end
+
+    if amount == data.OreCapacity then 
+        playerGui.BlockSelection.Frame.InventoryFull.Visible = true
+    else
+        playerGui.BlockSelection.Frame.InventoryFull.Visible = false
+     end
 
     local waitTime = 0
     for _,v in pairs(blockInfo) do

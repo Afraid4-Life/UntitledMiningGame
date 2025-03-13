@@ -6,7 +6,8 @@ return{
         Breakable = true,
         defaultTime = 0.5,
         BaseRarity = 0,
-        Value = 4
+        Value = 4,
+        RectOffset = Vector2.new(435, 667),
     },
     [2] = {
         Name = "Clay",
@@ -15,7 +16,8 @@ return{
         Breakable = true,
         defaultTime = 1.2, -- 1.2
         Layers = {["DirtY"] = 50, ["StoneY"] = 125},
-        Value = 8
+        Value = 8,
+        RectOffset = Vector2.new(409, 258)
     },
     [3] = {
         Name = "Stone",
@@ -24,7 +26,8 @@ return{
         Breakable = true,
         defaultTime = 4, -- 2
         Layers = {["DirtY"] = 250, ["ClayY"] = 100},
-        Value = 12
+        Value = 12,
+        RectOffset = Vector2.new(281, 383),
     },
     [4] = {
         Name = "Bedrock",
@@ -32,6 +35,7 @@ return{
         Material = Enum.Material.SmoothPlastic,
         Breakable = false,
         defaultTime = 0,
+        RectOffset = Vector2.new(285,544)
     },
     [5] = {
         Name = "Coal",
@@ -40,7 +44,8 @@ return{
         Breakable = true,
         defaultTime = 1.5,
         Layers = {["StoneY"] = 40, ["ClayY"] = 75, ["DirtY"] = 350},
-        Value = 35
+        Value = 35,
+        RectOffset = Vector2.new(256.5, 409)
     },
     [6] = {
         Name = "Iron",
@@ -49,7 +54,8 @@ return{
         Breakable = true,
         defaultTime = 3, -- 2
         Layers = {["StoneY"] = 50, ["ClayY"] = 250},
-        Value = 75
+        Value = 75,
+        RectOffset = Vector2.new(230, 408)
     },
     [7] = {
         Name = "Diamond",
@@ -58,7 +64,8 @@ return{
         Breakable = true,
         defaultTime = 15, -- 2
         Layers = {["StoneY"] = 150},
-        Value = 250
+        Value = 250,
+        RectOffset = Vector2.new(408, 869)
     },
     [8] = {
         Name = "Emerald",
@@ -67,15 +74,17 @@ return{
         Breakable = true,
         defaultTime = 8, -- 2
         Layers = {["StoneY"] = 150},
-        Value = 300
+        Value = 300,
+        RectOffset = Vector2.new(434, 870)
     },
     [9] = {
         Name = "Limestone",
-        Color = Color3.new(0.607843, 0.580392, 0.498039),
+        Color = Color3.new(0.827450, 0.807843, 0.749019),
         Material = Enum.Material.Concrete,
         Breakable = true,
         defaultTime = 2.2, -- 2
-        Value = 10
+        Value = 10,
+        RectOffset = Vector2.new(460, 487)
     },
     [10] = {
         Name = "Sandstone",
@@ -83,6 +92,7 @@ return{
         Material = Enum.Material.Sand,
         Breakable = true,
         defaultTime = 1.6, -- 2
-        Value = 11
+        Value = 11,
+        RectOffset = Vector2.new(487, 128)
     }
 }

@@ -58,8 +58,17 @@ end
 
 --// Pickaxe Communications
 PickComms.OnServerEvent:Connect(function(player, targ)
-    if (targ.Position - player.Character.HumanoidRootPart.Position).magnitude > blockSettings.DefaultBreakRange then return end
+    if (targ.Position - player.Character.HumanoidRootPart.Position).magnitude > blockSettings.DefaultBreakRange  then return end
+
     local data = DataManager:Get(player)
+
+    local amount = 0
+    for _,v in pairs(data.OreInventory) do
+        amount += v
+    end
+
+    if amount >= data.OreCapacity then return end
+
     for _,v in pairs(blockInfo) do
         if v.Name == targ.Name then
 
@@ -76,12 +85,12 @@ PickComms.OnServerEvent:Connect(function(player, targ)
             if targ.Name ~= "Bedrock" then
                 targ:Destroy()
                 data.OreInventory[targ.Name] += 1
-                InventoryComm:FireClient(player, data.OreInventory)
+                InventoryComm:FireClient(player, data)
             end
 
 
             --//  spawn blocks around destroyed block \\--
-            --// turn into forloop, very easy (post + vector3.new()) and using a table with all vector offsets
+            --// turn into for loop, very easy (post + vector3.new()) and using a table with all vector offsets
             local blockData1 = blockEngine.createBlock(calcType(targ.Position.Y), targ.Position.X-4,targ.Position.Y,targ.Position.Z)
             local blockData2 = blockEngine.createBlock(calcType(targ.Position.Y), targ.Position.X+4,targ.Position.Y,targ.Position.Z)
             local blockData3 = blockEngine.createBlock(calcType(targ.Position.Y+4), targ.Position.X,targ.Position.Y+4,targ.Position.Z)
@@ -95,7 +104,29 @@ PickComms.OnServerEvent:Connect(function(player, targ)
             buildPart.new(blockData4)
             buildPart.new(blockData5)
             buildPart.new(blockData6)
-            -- testing 123
         end
     end
 end)
+
+
+for _,SellPart in pairs(workspace.SellPoints:GetChildren()) do
+    SellPart.SellPrompt.Triggered:Connect(function(player)
+        local data 
+        repeat task.wait() data = DataManager:Get(player) until data ~= nil
+
+        for i,_ in (data.OreInventory) do
+            if data.OreInventory[i] > 0 then
+                data.OreInventory[i] = 0
+                
+                for _,v in pairs(blockInfo) do
+                    if v.Name == i then
+                        data.Money += v.Value
+                    end
+                end
+
+            end
+        end
+
+        InventoryComm:FireClient(player, data)
+    end)
+end

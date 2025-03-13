@@ -2,7 +2,7 @@ local ProfileService = require(game.ReplicatedStorage.ProfileService)
 local Players = game:GetService("Players")
 
 local ProfileStore = ProfileService.GetProfileStore(
-	"TestSave3", -- OfficialSave1
+	"TestSave7", -- OfficialSave1
 	{ 
 		OreInventory = {
 			["Dirt"] = 0,
@@ -15,7 +15,10 @@ local ProfileStore = ProfileService.GetProfileStore(
 			["Emerald"] = 0,
 			["Limestone"] = 0,
 			["Sandstone"] = 0
-		}
+		},
+
+		OreCapacity = 50,
+		Money = 0
 	}
 )
 
