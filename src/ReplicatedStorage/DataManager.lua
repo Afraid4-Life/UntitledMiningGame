@@ -18,7 +18,9 @@ local ProfileStore = ProfileService.GetProfileStore(
 		},
 
 		OreCapacity = 50,
-		Money = 0
+		Money = 0,
+
+		PickaxeSpeed = 5
 	}
 )
 

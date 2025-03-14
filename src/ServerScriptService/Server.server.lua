@@ -88,7 +88,7 @@ PickComms.OnServerEvent:Connect(function(player, targ)
                 end
             end
             
-            task.wait(waitTime)
+            task.wait(waitTime/data.PickaxeSpeed)
 
             if targ.Name ~= "Bedrock" then
                 targ:Destroy()
@@ -101,7 +101,6 @@ PickComms.OnServerEvent:Connect(function(player, targ)
             for i = 0, 5, 1 do
                 i += 1
                 local blockData = blockEngine.createBlock(calcType(targ.Position.Y+vectorOffsets[i].Y), Vector3.new(targ.Position.X,targ.Position.Y,targ.Position.Z)+vectorOffsets[i])
-                print(vectorOffsets[i], i)
                 buildPart.new(blockData)
             end
         end

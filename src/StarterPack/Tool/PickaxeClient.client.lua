@@ -74,9 +74,9 @@ tool.Activated:Connect(function()
 
     PickComms:FireServer(Mouse.Target)
     playerGui.BlockSelection.Frame.BlockSelected.Text = Mouse.Target.Name
-    TweenService:Create(playerGui.BlockSelection.Frame.Progress.Main, TweenInfo.new(waitTime), {Size = UDim2.fromScale(1,1)}):Play()
+    TweenService:Create(playerGui.BlockSelection.Frame.Progress.Main, TweenInfo.new(waitTime/data.PickaxeSpeed), {Size = UDim2.fromScale(1,1)}):Play()
 
-    task.wait(waitTime)
+    task.wait(waitTime/data.PickaxeSpeed)
     
     playerGui.BlockSelection.Frame.Progress.Main.Size = UDim2.fromScale(0,1)
 

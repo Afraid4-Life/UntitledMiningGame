@@ -47,30 +47,47 @@ InventoryComm.OnClientEvent:Connect(function(data)
         player.PlayerGui.Inventory.Frame.InventorySpace.Frame.Grow.BackgroundColor3 = Color3.fromRGB(157, 228, 116)
     end
 
-    player.PlayerGui.Inventory.Money.Text = "$"..data.Money
+    player.PlayerGui.Inventory.StatsFrame.Money.Text = "$"..data.Money
 end)
 
 --// Depth Meter \\--
 RunService.Heartbeat:Connect(function()
-    player.PlayerGui.Inventory.Position.Text = "Depth: "..math.floor((player.Character.HumanoidRootPart.Position.Y/4))
+    player.PlayerGui.Inventory.StatsFrame.PositionText.Text = "Depth: "..math.floor((player.Character.HumanoidRootPart.Position.Y/4))
 end)
 
 
-
---// Inventory Scroll Mechanic \\-
 local scrollframe = playerGui:WaitForChild("Inventory"):WaitForChild("Frame"):WaitForChild("ScrollingFrame")
 scrollframe.CanvasSize = UDim2.new(0, 0, 0, scrollframe.UIListLayout.AbsoluteContentSize.Y)
 
 
+local function updateFrameSizes()
+	scrollframe.CanvasSize = UDim2.new(0, 0, 0, scrollframe.UIListLayout.AbsoluteContentSize.Y)
+
+    playerGui:WaitForChild("Inventory"):WaitForChild("Frame"):WaitForChild("Background").Size = UDim2.new(1, 0, 0, scrollframe.UIListLayout.AbsoluteContentSize.Y)
+    playerGui:WaitForChild("Inventory"):WaitForChild("Frame"):WaitForChild("Background").Position = UDim2.new(0, 0, 0.908, -scrollframe.UIListLayout.AbsoluteContentSize.Y)
+
+    if scrollframe.UIListLayout.AbsoluteContentSize.Y == 0 then
+        playerGui:WaitForChild("Inventory"):WaitForChild("Frame"):WaitForChild("Background").UIStroke.Thickness = 0
+    else
+        playerGui:WaitForChild("Inventory"):WaitForChild("Frame"):WaitForChild("Background").UIStroke.Thickness = 0.7
+    end
+end
+
+
+--// Inventory Scroll Mechanic \\-
+
+
 scrollframe.ChildAdded:Connect(function(child)
 	task.wait()
-	scrollframe.CanvasSize = UDim2.new(0, 0, 0, scrollframe.UIListLayout.AbsoluteContentSize.Y)
-    if scrollframe.UIListLayout.AbsoluteContentSize.Y > 300 then
-        child.Size = child.Size.Y.Scale / 2
-    end
+	updateFrameSizes()
 end)
 
 scrollframe.ChildRemoved:Connect(function()
 	task.wait()
-	scrollframe.CanvasSize = UDim2.new(0, 0, 0, scrollframe.UIListLayout.AbsoluteContentSize.Y)
+    updateFrameSizes()
+end)
+
+--// Tp to Surface Button \\--
+playerGui:WaitForChild("Inventory"):WaitForChild("SurfaceTP").MouseButton1Down:Connect(function()
+    player.Character.HumanoidRootPart.CFrame = workspace.SpawnLocation.CFrame + Vector3.new(0,2,0)
 end)

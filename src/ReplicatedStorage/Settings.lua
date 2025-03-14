@@ -11,5 +11,6 @@ return {
     SandstoneY = -18,
     LimestoneY = -30,
     StoneY = -80,
-    BedrockY = -150
+    DeepStoneY = -125,
+    BedrockY = -250
 }
