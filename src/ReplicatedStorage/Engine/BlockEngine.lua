@@ -3,20 +3,20 @@ Blocks.__index = Blocks
 
 local allBlocks = {}
 
-function Blocks.createBlock(blockType, x, y, z)
+function Blocks.createBlock(blockType, blockVector)
     local block = setmetatable({}, Blocks)
 
     --// check if block has already been mined or is above surface level
     for _,v in (allBlocks) do
-        if v.X == x and v.Y == y and v.Z == z or y > 0 then 
+        if v.X == blockVector.X and v.Y == blockVector.Y and v.Z == blockVector.Z or blockVector.Y > 0 then 
             return nil
         end
     end
 
     --// block data
-    block.X = x
-    block.Y = y
-    block.Z = z
+    block.X = blockVector.X
+    block.Y = blockVector.Y
+    block.Z = blockVector.Z
     block.Type = blockType
 
     table.insert(allBlocks, block)
