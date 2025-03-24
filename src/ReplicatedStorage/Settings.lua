@@ -1,4 +1,4 @@
-return {
+return table.freeze({
     DefaultBreakRange = 5,
 
     GridX = 10,
@@ -13,4 +13,4 @@ return {
     StoneY = -80,
     DeepStoneY = -125,
     BedrockY = -250
-}
+})

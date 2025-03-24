@@ -75,8 +75,6 @@ end
 
 
 --// Inventory Scroll Mechanic \\-
-
-
 scrollframe.ChildAdded:Connect(function(child)
 	task.wait()
 	updateFrameSizes()

@@ -1,4 +1,4 @@
-return{
+return table.freeze({
     [1] = {
         Name = "Dirt",
         Color = Color3.fromRGB(145, 101, 75),
@@ -95,4 +95,4 @@ return{
         Value = 11,
         RectOffset = Vector2.new(487, 128)
     }
-}
+})

@@ -46,7 +46,7 @@ local function calcType(yPos)
     for i,v in pairs (blockInfo) do
         if v.Layers then
             for i2,v2 in pairs(v.Layers) do
-                if yPos <= blockSettings[i2] and math.random(1,v2) == 1 then
+                if yPos <= blockSettings[i2] and yPos >= blockSettings[] and math.random(1,v2) == 1 then
                     return blockInfo[i]
                 end
             end
@@ -97,7 +97,7 @@ PickComms.OnServerEvent:Connect(function(player, targ)
             end
 
 
-            --//  spawn blocks around destroyed block \\--
+            --// spawn blocks around destroyed block \\--
             for i = 0, 5, 1 do
                 i += 1
                 local blockData = blockEngine.createBlock(calcType(targ.Position.Y+vectorOffsets[i].Y), Vector3.new(targ.Position.X,targ.Position.Y,targ.Position.Z)+vectorOffsets[i])
